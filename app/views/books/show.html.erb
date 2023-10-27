@@ -2,7 +2,7 @@
   <div class='row'>
     <div class='col-md-3'>
       <h2>User info</h2>
-      <%= render 'users/info', user: @user %>
+      <%= render 'users/follow', user: @user %>
       <h2 class="mt-3">New book</h2>
 
       <%= render 'form', book: @book %>
@@ -25,7 +25,7 @@
 <!--いいね機能-->
           <% if @books.favorited_by?(current_user) %>
           <td>
-            <%= link_to book_favorites_path(@books), method: :delete do %>
+            <%= link_to book_favorites_path(@books), method: :delete, class: "text-danger" do %>
               <i class="fa-solid fa-heart"></i><%= @books.favorites.count %>
             <% end %>
           </td>
@@ -39,6 +39,9 @@
           <td><p>コメント数：<%= @books.book_comments.count %></p></td>
         </tr>
       </table>
+<!--いいねの色を変えたい場合-->
+<!--class: "text-danger"だとブートストラップの色で指定できる-->
+<!--style: "color: red;"だといろんな色を指定できる-->
 <!--コメント機能-->
       <div>
         <p><% @books.book_comments.each do |book_comment| %></p>

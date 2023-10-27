@@ -3,12 +3,12 @@ class FavoritesController < ApplicationController
     book = Book.find(params[:book_id])
     favorite = current_user.favorites.new(book_id: book.id)
     favorite.save
-    if request.referer.include?('books')
-      redirect_to books_path
-    elsif request.referer.include?('users')
+    if request.referer.include?("books/#{book.id}")
+      redirect_to book_path(book)
+    elsif request.referer.include?("users")
       redirect_to user_path(current_user.id)
     else
-      redirect_to book_path(book)
+      redirect_to books_path
     end
 
   end
@@ -17,12 +17,12 @@ class FavoritesController < ApplicationController
     book = Book.find(params[:book_id])
     favorite = current_user.favorites.find_by(book_id: book.id)
     favorite.destroy
-    if request.referer.include?('books')
-      redirect_to books_path
-    elsif request.referer.include?('users')
+    if request.referer.include?("books/#{book.id}")
+      redirect_to book_path(book)
+    elsif request.referer.include?("users")
       redirect_to user_path(current_user.id)
     else
-      redirect_to book_path(book)
+      redirect_to books_path
     end
 
   end
