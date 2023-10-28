@@ -1,24 +1,52 @@
-<h2>Results index</h2>
-
-<table class="table table-hover table-inverse">
+<% if @range == "User" %>
   <!--検索対象がUserの時 -->
-  <% if @range == "User" %>
+  <h2>Users search for "<%= @word %>"</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
+          <td><%= image_tag user.get_profile_image, size:'50x50' %></td>
           <td><%= user.name %></td>
+          <td><%= link_to 'Show', user %></td>
         </tr>
       <% end %>
     </tbody>
-  <% else %>
-    <!--検索対象がUserではない時(= Bookの時) -->
+<% else %>
+  <!--検索対象がUserではない時(= Bookの時) -->
+  <h2>Books search for "<%= @word %>"</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
     <tbody>
       <% @books.each do |book| %>
         <tr>
-          <td><%= book.title %></td>
+          <td><%= image_tag book.user.get_profile_image, size:'50x50' %></td>
+          <td><%= link_to book.title, book %></td>
           <td><%= book.body %></td>
         </tr>
       <% end %>
     </tbody>
-  <% end %>
+  </table>
+<% end %>
+
+
+
+
+
+
+
+
+  </tbody>
 </table>
