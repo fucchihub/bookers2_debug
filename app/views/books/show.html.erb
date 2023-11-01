@@ -26,27 +26,19 @@
           <td id="favorite_buttons_<%= @books.id %>">
             <%= render "favorites/favorite", book: @books %>
           </td>
-          <td><p>コメント数：<%= @books.book_comments.count %></p></td>
+          <td>コメント数：<span id="comment_count"><%= @books.book_comments.count %></span></td>
         </tr>
       </table>
 <!--いいねの色を変えたい場合-->
 <!--class: "text-danger"だとブートストラップの色で指定できる-->
 <!--style: "color: red;"だといろんな色を指定できる-->
 <!--コメント機能-->
-      <div>
-        <p><% @books.book_comments.each do |book_comment| %></p>
-          <%= image_tag book_comment.user.get_profile_image, size:'50x50' %>
-          <%= book_comment.comment %>
-          <% if book_comment.user == current_user %>
-            <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment),
-            method: :delete, class: "btn btn-sm btn-danger" %>
-          <% end %>
-        <% end %>
+      <div id="book_comments">
+        <%= render "book_comments/show", books: @books %>
       </div>
-      <%= form_with model: [@books, @book_comment] do |f| %>
-        <p><%= f.text_area :comment, rows: '2', placeholder: "コメントをここに" %></p>
-        <p><%= f.submit %></p>
-      <% end %>
+      <div id="comment_form">
+        <%= render "book_comments/form", books: @books, book_comment: @book_comment %>
+      </div>
     </div>
   </div>
 </div>
