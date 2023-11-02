@@ -17,7 +17,7 @@ class BooksController < ApplicationController
           end
         end
       end
-      if @isRoom                           #Roomがまだない場合、新たにRoomとEntryを作成する
+      if @isRoom                           #Roomがまだない場合、新たにRoomとEntryを作成する。
       else
         @room = Room.new
         @entry = Entry.new
@@ -31,7 +31,6 @@ class BooksController < ApplicationController
     @books = Book.includes(:favorites).sort_by { |book| -book.favorites.where(created_at: from...to).count }
     @book = Book.new
   end
-
 
   def create
     @book = Book.new(book_params)
