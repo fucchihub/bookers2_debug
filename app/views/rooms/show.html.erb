@@ -1,0 +1,25 @@
+<% @entries.each do |e| %>
+  <% if current_user.id != e.user.id %>
+      <h2><%= e.user.name %>さんとのトークルーム</h2>
+  <% end %>
+<% end %>
+<%= link_to "ユーザ一覧に戻る", users_path %>
+
+<hr>
+
+<% if @messages.present? %>
+  <% @messages.each do |m| %>
+    <% current_user.id == m.user.id  %>
+      <p class="text-success font-weight-bold"><%= m.user.name %></p>
+      <p class="text-muted bg-light rounded w-25"><%= m.content %></p>
+  <% end %>
+<% end %>
+
+
+<div>
+  <%= form_with model: @message do |f| %>
+    <%= f.text_field :content, placeholder: "メッセージを入力", class: "form-control w-50" %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.submit "投稿", class: "btn btn-sm btn-info" %>
+  <% end %>
+</div>

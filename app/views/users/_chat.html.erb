@@ -1,0 +1,14 @@
+<% unless user.id == current_user.id %>
+  <% if (current_user.following? user) && (user.following? current_user) %>
+    <% if isRoom == true %>
+      <%= link_to "チャットへ", "/rooms/#{roomId}", class: 'btn btn-sm btn-info ml-2' %>
+    <% else %>
+      <%= form_with model: room do |f| %>
+        <%= fields_for entry do |e| %>
+          <%= e.hidden_field :user_id, value: user.id %>
+        <% end %>
+        <%= f.submit "チャットを始める", class: "btn btn-sm btn-info ml-2"%>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

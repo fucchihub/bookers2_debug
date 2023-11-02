@@ -10,25 +10,22 @@
   </tr>
   <tr>
 	  <th>follows</th>
-	  <th>
-	    <%= link_to user_followings_path(user) do %>
-        <%= user.followings.count %>
-      <% end %>
-    </th>
+	  <th><%= link_to user.followings.count, user_followings_path(user) %></th>
   </tr>
   <tr>
 	  <th>followers</th>
-	  <th>
-	    <%= link_to user_followers_path(user) do %>
-        <%= user.followers.count %>
-      <% end %>
-    </th>
+	  <th><%= link_to user.followers.count, user_followers_path(user) %></th>
   </tr>
 </table>
 
 <div class='row'>
+  <% if current_user != user %>
+    <td><%= render "relationships/follow", user: user %></td>
+    <td><%= render "users/chat", user: user, isRoom: isRoom, roomId: roomId, room: room, entry: entry %></td>
+  <% else %>
   <!--ユーザー編集ボタン-->
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
   <% end %>
 </div>
