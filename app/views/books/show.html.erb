@@ -27,6 +27,7 @@
             <%= render "favorites/favorite", book: @books %>
           </td>
           <td id="comment_count"><%= render "book_comments/count", books: @books %></td>
+          <td>閲覧数：<%= @books.read_counts.count %></td>
         </tr>
       </table>
 <!--いいねの色を変えたい場合-->

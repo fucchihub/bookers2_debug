@@ -3,6 +3,10 @@ class BooksController < ApplicationController
 
   def show
     @books = Book.find(params[:id])
+    unless ReadCount.where(created_at: Time.zone.now.all_day).find_by(user_id: current_user.id, book_id: @books.id)
+      current_user.read_counts.create(book_id: @books.id)
+    end
+
     @user = @books.user
     @book = Book.new
     @book_comment = BookComment.new
