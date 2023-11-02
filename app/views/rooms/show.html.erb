@@ -9,7 +9,7 @@
 
 <% if @messages.present? %>
   <% @messages.each do |m| %>
-    <% current_user.id == m.user.id  %>
+    <% current_user.id == m.user.id %>
       <p class="text-success font-weight-bold"><%= m.user.name %></p>
       <p class="text-muted bg-light rounded w-25"><%= m.content %></p>
   <% end %>
