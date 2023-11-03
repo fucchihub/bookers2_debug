@@ -46,6 +46,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def search_form
+    @user = User.find(params[:user_id])
+    @books = @user.books.where(created_at: params[:created_at].to_date.all_day)
+    render :search_form
+  end
+
+
   private
 
   def user_params

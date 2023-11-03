@@ -1,0 +1,15 @@
+$('.search_form_table').html(`
+  <h4>検索結果</h4>
+  <table class="table table-bordered w-25">
+    <thead>
+      <tr>
+        <th>投稿数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= j( @books.count ) %></td>
+      </tr>
+    </tbody>
+  </table>
+`)
