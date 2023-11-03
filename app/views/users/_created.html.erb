@@ -49,3 +49,67 @@
     </tbody>
   </table>
 </div>
+
+<h4>7日間分の投稿数</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <% (0..6).to_a.reverse.each do |n| %>
+        <th><%= (Time.zone.now - n.days).to_date.strftime("%y/%m/%d") %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>投稿数</td>
+      <% (0..6).to_a.reverse.each do |n| %>
+        <td><%= books.created_days_ago(n).count %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="myLineChart"></canvas>
+  <script>
+    $(document).on('turbolinks:load', function() {
+      var ctx = document.getElementById("myLineChart");
+      var labels = [
+        <% (0..6).to_a.reverse.each do |n| %>
+          "<%= (Time.zone.now - n.days).to_date.strftime("%y/%m/%d") %>",
+        <% end %>
+      ];
+      var pastWeekCount = <%= books.past_week_count %>;
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: '投稿した本の数',
+              data: pastWeekCount,
+              borderColor: "rgba(0,0,255,1)",
+              backgroundColor: "rgba(0,0,0,0)",
+              tension: 0.4
+            }
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: '7日間の投稿数の比較'
+          },
+          responsive: true,
+          scales: {
+            y:{
+              suggestedMin: 0,
+              suggestedMax: 10
+            },
+            x:{
+              stacked: true
+            },
+          },
+        }
+      });
+    });
+  </script>
