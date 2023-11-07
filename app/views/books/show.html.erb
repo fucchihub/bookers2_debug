@@ -12,22 +12,22 @@
   		<table class='table'>
   		  <tr>
           <td><%= link_to(@books.user) do %>
-            <%= image_tag @books.user.get_profile_image, size:"100x100" %><br>
+            <%= image_tag @books.user.get_profile_image, size:"50x50" %><br>
             <%= @books.user.name %>
             <% end %>
           </td>
           <td><%= link_to @books.title, @books %></td>
           <td><%= @books.body %></td>
-          <% if @books.user == current_user %>
-            <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', @books, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-          <% end %>
 <!--いいね機能-->
           <td id="favorite_buttons_<%= @books.id %>">
             <%= render "favorites/favorite", book: @books %>
           </td>
           <td id="comment_count"><%= render "book_comments/count", books: @books %></td>
-          <td>閲覧数：<%= @books.read_counts.count %></td>
+          <td><%= render "static_rate", book: @books %></td>
+          <% if @books.user == current_user %>
+            <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
+            <td><%= link_to 'Destroy', @books, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+          <% end %>
         </tr>
       </table>
 <!--いいねの色を変えたい場合-->
