@@ -12,10 +12,21 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-      <main>
-        <p id="notice"><%= notice %></p>
-        <%= yield %>
-      </main>
+    <main>
+      <!--検索フォームはmainタグ内に置かないと検索されない-->
+      <% if user_signed_in? %>
+      <div class="d-flex pt-1">
+        <div class="ml-auto">
+          <%= render 'searches/search' %>
+        </div>
+        <div class="mr-auto ml-3">
+          <%= render 'tagsearches/tagsearch' %>
+        </div>
+      </div>
+      <% end %>
+      <p id="notice"><%= notice %></p>
+      <%= yield %>
+    </main>
     <%= render 'layouts/footer' %>
   </body>
 </html>

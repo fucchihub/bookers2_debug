@@ -18,6 +18,7 @@
           </td>
           <td><%= link_to @books.title, @books %></td>
           <td><%= @books.body %></td>
+          <td><%= link_to @books.category, tagsearches_search_path(content: @books.category) %></td>
 <!--いいね機能-->
           <td id="favorite_buttons_<%= @books.id %>">
             <%= render "favorites/favorite", book: @books %>

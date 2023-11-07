@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'groups/new'
-  get 'groups/index'
-  get 'groups/show'
-  get 'groups/edit'
   get 'relationships/followings'
   get 'relationships/followers'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -32,6 +28,7 @@ Rails.application.routes.draw do
   end
 
   get "search" => "searches#search"
+  get 'tagsearches/search' => 'tagsearches#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end
